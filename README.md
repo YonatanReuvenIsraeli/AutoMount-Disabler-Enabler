@@ -1,1 +1,1 @@
-# AutoMount-Enabler-Disabler
+# AutoMount Enabler/Disabler
