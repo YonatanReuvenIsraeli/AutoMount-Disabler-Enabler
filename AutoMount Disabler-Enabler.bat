@@ -2,7 +2,7 @@
 setlocal
 title AutoMount Disabler/Enabler
 echo Program Name: AutoMount Disabler/Enabler
-echo Version: 1.0.0
+echo Version: 1.0.1
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -34,6 +34,7 @@ if exist "%cd%\DiskPart.txt" goto DiskPartExist
 echo automount disable > "%cd%\DiskPart.txt"
 echo automount scrub >> "%cd%\DiskPart.txt"
 DiskPart /s "%cd%\DiskPart.txt" > nul 2>&1
+del "%cd%\DiskPart.txt"
 echo Auto-mounting of new drives has been disabled.
 if "%DiskPart%"=="True" goto DiskPartDone
 goto Start
@@ -42,6 +43,7 @@ goto Start
 if exist "%cd%\DiskPart.txt" goto DiskPartExist
 echo automount Enable > "%cd%\DiskPart.txt"
 DiskPart /s "%cd%\DiskPart.txt" > nul 2>&1
+del "%cd%\DiskPart.txt"
 echo Auto-mounting of new drives has been enabled.
 if "%DiskPart%"=="True" goto DiskPartDone
 goto Start
