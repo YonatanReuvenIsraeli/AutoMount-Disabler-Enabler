@@ -2,7 +2,7 @@
 setlocal
 title AutoMount Disabler/Enabler
 echo Program Name: AutoMount Disabler/Enabler
-echo Version: 1.0.1
+echo Version: 1.0.2
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -30,6 +30,7 @@ echo Invalid Syntax!
 goto Start
 
 :1
+set DiskPart=
 if exist "%cd%\DiskPart.txt" goto DiskPartExist
 echo automount disable > "%cd%\DiskPart.txt"
 echo automount scrub >> "%cd%\DiskPart.txt"
@@ -40,6 +41,7 @@ if "%DiskPart%"=="True" goto DiskPartDone
 goto Start
 
 :2
+set DiskPart=
 if exist "%cd%\DiskPart.txt" goto DiskPartExist
 echo automount Enable > "%cd%\DiskPart.txt"
 DiskPart /s "%cd%\DiskPart.txt" > nul 2>&1
