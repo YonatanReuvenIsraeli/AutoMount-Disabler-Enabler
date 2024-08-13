@@ -2,7 +2,7 @@
 setlocal
 title AutoMount Disabler/Enabler
 echo Program Name: AutoMount Disabler/Enabler
-echo Version: 1.2.1
+echo Version: 1.2.2
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -24,7 +24,7 @@ echo [3] Exit
 set AutoMount=
 set /p AutoMount="What do you want to do? "
 if /i "%AutoMount%"=="1" goto DiskPartSet
-if /i "%AutoMount%"=="2" goto 2
+if /i "%AutoMount%"=="2" goto DiskPartSet
 if /i "%AutoMount%"=="3" goto Close
 echo Invalid syntax!
 goto Start
