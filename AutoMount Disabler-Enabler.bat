@@ -37,6 +37,7 @@ echo Disabling auto-mounting of new drives.
 echo automount disable > "%cd%\DiskPart.txt"
 echo automount scrub >> "%cd%\DiskPart.txt"
 DiskPart /s "%cd%\DiskPart.txt" > nul 2>&1
+if not "%errorlevel%"=="0" goto DiskPartError
 del "%cd%\DiskPart.txt" /f /q
 echo Auto-mounting of new drives has been disabled.
 if "%DiskPart%"=="True" goto DiskPartDone
@@ -49,6 +50,7 @@ echo.
 echo Enabling auto-mounting of new drives.
 echo automount enable > "%cd%\DiskPart.txt"
 DiskPart /s "%cd%\DiskPart.txt" > nul 2>&1
+if not "%errorlevel%"=="0" goto DiskPartError
 del "%cd%\DiskPart.txt" /f /q
 echo Auto-mounting of new drives has been enabled.
 if "%DiskPart%"=="True" goto DiskPartDone
