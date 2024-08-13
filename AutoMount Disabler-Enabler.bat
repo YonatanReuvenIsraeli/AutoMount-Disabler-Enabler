@@ -2,7 +2,7 @@
 setlocal
 title AutoMount Disabler/Enabler
 echo Program Name: AutoMount Disabler/Enabler
-echo Version: 1.1.2
+echo Version: 1.2.0
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -61,6 +61,14 @@ set DiskPart=True
 echo.
 echo Please temporary rename to something else or temporary move to another location "%cd%\DiskPart.txt" in order for this batch file to proceed. Press any key to continue when "%cd%\DiskPart.txt" is renamed to something else or moved to another location. This batch file will let you know when you can rename it back to its original name or move it back to its original location.
 pause > nul 2>&1
+if /i "%AutoMount%"=="1" goto 1
+if /i "%AutoMount%"=="2" goto 2
+
+:DiskPartError
+echo.
+echo There has been an error! Press any key to try again.
+pause > nul 2>&1
+del "%cd%\DiskPart.txt" /f /q
 if /i "%AutoMount%"=="1" goto 1
 if /i "%AutoMount%"=="2" goto 2
 
