@@ -2,7 +2,7 @@
 setlocal
 title AutoMount Disabler/Enabler
 echo Program Name: AutoMount Disabler/Enabler
-echo Version: 1.2.8
+echo Version: 1.2.9
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -21,7 +21,6 @@ echo.
 echo [1] Disable auto-mounting of new drives.
 echo [2] Enable auto-mounting of new drives.
 echo [3] Exit
-echo.
 echo.
 set AutoMount=
 set /p AutoMount="What do you want to do? "
@@ -80,7 +79,6 @@ if /i "%AutoMount%"=="2" goto "2"
 echo.
 echo You can now rename or move back the file back to "%cd%\DiskPart.txt".
 goto "Start"
-
 :"Close"
 endlocal
 exit
