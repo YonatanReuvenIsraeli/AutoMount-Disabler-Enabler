@@ -2,7 +2,7 @@
 setlocal
 title AutoMount Disabler/Enabler
 echo Program Name: AutoMount Disabler/Enabler
-echo Version: 1.2.9
+echo Version: 1.2.10
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -43,7 +43,7 @@ echo automount disable > "%cd%\DiskPart.txt"
 echo automount scrub >> "%cd%\DiskPart.txt"
 DiskPart /s "%cd%\DiskPart.txt" > nul 2>&1
 if not "%errorlevel%"=="0" goto "DiskPartError"
-del "%cd%\DiskPart.txt" /f /q
+del "%cd%\DiskPart.txt" /f /q > nul 2>&1
 echo Auto-mounting of new drives has been disabled.
 if "%DiskPart%"=="True" goto "DiskPartDone"
 goto "Start"
@@ -55,7 +55,7 @@ echo Enabling auto-mounting of new drives.
 echo automount enable > "%cd%\DiskPart.txt"
 DiskPart /s "%cd%\DiskPart.txt" > nul 2>&1
 if not "%errorlevel%"=="0" goto "DiskPartError"
-del "%cd%\DiskPart.txt" /f /q
+del "%cd%\DiskPart.txt" /f /q > nul 2>&1
 echo Auto-mounting of new drives has been enabled.
 if "%DiskPart%"=="True" goto "DiskPartDone"
 goto "Start"
@@ -69,7 +69,7 @@ if /i "%AutoMount%"=="1" goto "1"
 if /i "%AutoMount%"=="2" goto "2"
 
 :"DiskPartError"
-del "%cd%\DiskPart.txt" /f /q
+del "%cd%\DiskPart.txt" /f /q > nul 2>&1
 echo There has been an error! Press any key to try again.
 pause > nul 2>&1
 if /i "%AutoMount%"=="1" goto "1"
