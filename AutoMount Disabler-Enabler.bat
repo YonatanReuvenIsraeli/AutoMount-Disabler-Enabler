@@ -2,7 +2,7 @@
 setlocal
 title AutoMount Disabler/Enabler
 echo Program Name: AutoMount Disabler/Enabler
-echo Version: 1.2.12
+echo Version: 1.2.13
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -81,6 +81,7 @@ if /i "%AutoMount%"=="2" goto "2"
 echo.
 echo You can now rename or move back the file back to "%cd%\DiskPart.txt".
 goto "Start"
+
 :"Close"
 endlocal
 exit
