@@ -2,7 +2,7 @@
 setlocal
 title AutoMount Disabler/Enabler
 echo Program Name: AutoMount Disabler/Enabler
-echo Version: 1.2.14
+echo Version: 1.2.15
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -19,7 +19,7 @@ goto "Close"
 :"Start"
 echo.
 echo [1] Disable auto-mounting of new drives.
-echo [2] Enable auto-mounting of new drives.
+echo [2] Enable auto-mounting of new drives. (Windows Default)
 echo [3] Exit
 echo.
 set AutoMount=
