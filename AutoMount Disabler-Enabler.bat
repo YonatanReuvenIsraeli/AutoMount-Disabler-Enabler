@@ -2,12 +2,12 @@
 setlocal
 title AutoMount Disabler/Enabler
 echo Program Name: AutoMount Disabler/Enabler
-echo Version: 1.2.17
+echo Version: 1.2.18
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
-echo Sponsor: https://github.com/sponsors/YonatanReuvenIsraeli 
-net session > nul 2>&1
+echo Sponsor: https://github.com/sponsors/YonatanReuvenIsraeli
+"%windir%\System32\net.exe" session > nul 2>&1
 if not "%errorlevel%"=="0" goto "NotAdministrator"
 goto "Start"
 
@@ -21,7 +21,7 @@ goto "Close"
 echo.
 echo [1] Disable auto-mounting of new drives.
 echo [2] Enable auto-mounting of new drives. (Windows Default)
-echo [3] Exit
+echo [3] Exit.
 echo.
 set AutoMount=
 set /p AutoMount="What do you want to do? "
@@ -43,7 +43,7 @@ echo Disabling auto-mounting of new drives.
 (echo automount disable) > "%cd%\DiskPart.txt"
 (echo automount scrub) >> "%cd%\DiskPart.txt"
 (echo exit) >> "%cd%\DiskPart.txt"
-DiskPart /s "%cd%\DiskPart.txt" > nul 2>&1
+"%windir%\System32\diskpart.exe" /s "%cd%\DiskPart.txt" > nul 2>&1
 if not "%errorlevel%"=="0" goto "DiskPartError"
 del "%cd%\DiskPart.txt" /f /q > nul 2>&1
 echo Auto-mounting of new drives has been disabled.
@@ -56,7 +56,7 @@ echo.
 echo Enabling auto-mounting of new drives.
 (echo automount enable) > "%cd%\DiskPart.txt"
 (echo exit) >> "%cd%\DiskPart.txt"
-DiskPart /s "%cd%\DiskPart.txt" > nul 2>&1
+"%windir%\System32\diskpart.exe" /s "%cd%\DiskPart.txt" > nul 2>&1
 if not "%errorlevel%"=="0" goto "DiskPartError"
 del "%cd%\DiskPart.txt" /f /q > nul 2>&1
 echo Auto-mounting of new drives has been enabled.
