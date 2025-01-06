@@ -1,8 +1,8 @@
 @echo off
 setlocal
-title AutoMount Disabler/Enabler
-echo Program Name: AutoMount Disabler/Enabler
-echo Version: 1.2.21
+title AutoMount Viewer/Disabler/Enabler
+echo Program Name: AutoMount Viewer/Disabler/Enabler
+echo Version: 2.0.0
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
@@ -27,15 +27,17 @@ goto "Close"
 
 :"Start"
 echo.
-echo [1] Disable auto-mounting of new drives.
-echo [2] Enable auto-mounting of new drives. (Windows Default)
-echo [3] Exit.
+echo [1] View current auto-mount status.
+echo [2] Disable auto-mounting of new drives.
+echo [3] Enable auto-mounting of new drives. (Windows Default)
+echo [4] Exit.
 echo.
 set AutoMount=
 set /p AutoMount="What do you want to do? "
 if /i "%AutoMount%"=="1" goto "DiskPartSet"
 if /i "%AutoMount%"=="2" goto "DiskPartSet"
-if /i "%AutoMount%"=="3" goto "Close"
+if /i "%AutoMount%"=="3" goto "DiskPartSet"
+if /i "%AutoMount%"=="4" goto "Close"
 echo Invalid syntax!
 goto "Start"
 
@@ -43,8 +45,19 @@ goto "Start"
 set DiskPart=
 if /i "%AutoMount%"=="1" goto "1"
 if /i "%AutoMount%"=="2" goto "2"
+if /i "%AutoMount%"=="3" goto "3"
 
 :"1"
+if exist "%cd%\diskpart.txt" goto "DiskPartExist"
+(echo automount) > "%cd%\diskpart.txt"
+(echo exit) >> "%cd%\diskpart.txt"
+"%windir%\System32\diskpart.exe" /s "%cd%\diskpart.txt" > nul 2>&1
+if not "%errorlevel%"=="0" goto "DiskPartError"
+del "%cd%\diskpart.txt" /f /q > nul 2>&1
+if /i "%DiskPart%"=="True" goto "DiskPartDone"
+goto "Start"
+
+:"2"
 if exist "%cd%\diskpart.txt" goto "DiskPartExist"
 echo.
 echo Disabling auto-mounting of new drives.
@@ -58,7 +71,7 @@ echo Auto-mounting of new drives has been disabled.
 if /i "%DiskPart%"=="True" goto "DiskPartDone"
 goto "Start"
 
-:"2"
+:"3"
 if exist "%cd%\diskpart.txt" goto "DiskPartExist"
 echo.
 echo Enabling auto-mounting of new drives.
@@ -78,6 +91,7 @@ echo Please temporary rename to something else or temporary move to another loca
 pause > nul 2>&1
 if /i "%AutoMount%"=="1" goto "1"
 if /i "%AutoMount%"=="2" goto "2"
+if /i "%AutoMount%"=="3" goto "3"
 
 :"DiskPartError"
 del "%cd%\diskpart.txt" /f /q > nul 2>&1
@@ -85,6 +99,7 @@ echo There has been an error! Press any key to try again.
 pause > nul 2>&1
 if /i "%AutoMount%"=="1" goto "1"
 if /i "%AutoMount%"=="2" goto "2"
+if /i "%AutoMount%"=="3" goto "3"
 
 :"DiskPartDone"
 echo.
