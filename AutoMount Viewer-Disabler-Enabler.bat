@@ -2,26 +2,18 @@
 setlocal
 title AutoMount Viewer/Disabler/Enabler
 echo Program Name: AutoMount Viewer/Disabler/Enabler
-echo Version: 2.0.2
+echo Version: 2.0.3
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
 echo Sponsor: https://github.com/sponsors/YonatanReuvenIsraeli
 "%windir%\System32\net.exe" session > nul 2>&1
 if not "%errorlevel%"=="0" goto "NotAdministrator"
-"%windir%\System32\net.exe" user > nul 2>&1
-if not "%errorlevel%"=="0" goto "InWindowsPreinstallationEnvironmentWindowsRecoveryEnvironment"
 goto "Start"
 
 :"NotAdministrator"
 echo.
 echo Please run this batch file as an administrator. Press any key to close this batch file.
-pause > nul 2>&1
-goto "Close"
-
-:"InWindowsPreinstallationEnvironmentWindowsRecoveryEnvironment"
-echo.
-echo You are in Windows Preinstallation Environment or Windows Recovery Environment! You must run this batch file in Windows. Press any key to close this batch file.
 pause > nul 2>&1
 goto "Close"
 
@@ -48,47 +40,47 @@ if /i "%AutoMount%"=="2" goto "2"
 if /i "%AutoMount%"=="3" goto "3"
 
 :"1"
-if exist "%cd%\diskpart.txt" goto "DiskPartExist"
-(echo automount) > "%cd%\diskpart.txt"
-(echo exit) >> "%cd%\diskpart.txt"
-"%windir%\System32\diskpart.exe" /s "%cd%\diskpart.txt"
+if exist "diskpart.txt" goto "DiskPartExist"
+(echo automount) > "diskpart.txt"
+(echo exit) >> "diskpart.txt"
+"%windir%\System32\diskpart.exe" /s "diskpart.txt"
 if not "%errorlevel%"=="0" goto "DiskPartError"
-del "%cd%\diskpart.txt" /f /q > nul 2>&1
+del "diskpart.txt" /f /q > nul 2>&1
 if /i "%DiskPart%"=="True" goto "DiskPartDone"
 goto "Start"
 
 :"2"
-if exist "%cd%\diskpart.txt" goto "DiskPartExist"
-(echo automount disable) > "%cd%\diskpart.txt"
-(echo automount scrub) >> "%cd%\diskpart.txt"
-(echo exit) >> "%cd%\diskpart.txt"
-"%windir%\System32\diskpart.exe" /s "%cd%\diskpart.txt"
+if exist "diskpart.txt" goto "DiskPartExist"
+(echo automount disable) > "diskpart.txt"
+(echo automount scrub) >> "diskpart.txt"
+(echo exit) >> "diskpart.txt"
+"%windir%\System32\diskpart.exe" /s "diskpart.txt"
 if not "%errorlevel%"=="0" goto "DiskPartError"
-del "%cd%\diskpart.txt" /f /q > nul 2>&1
+del "diskpart.txt" /f /q > nul 2>&1
 if /i "%DiskPart%"=="True" goto "DiskPartDone"
 goto "Start"
 
 :"3"
-if exist "%cd%\diskpart.txt" goto "DiskPartExist"
-(echo automount enable) > "%cd%\diskpart.txt"
-(echo exit) >> "%cd%\diskpart.txt"
-"%windir%\System32\diskpart.exe" /s "%cd%\diskpart.txt"
+if exist "diskpart.txt" goto "DiskPartExist"
+(echo automount enable) > "diskpart.txt"
+(echo exit) >> "diskpart.txt"
+"%windir%\System32\diskpart.exe" /s "diskpart.txt"
 if not "%errorlevel%"=="0" goto "DiskPartError"
-del "%cd%\diskpart.txt" /f /q > nul 2>&1
+del "diskpart.txt" /f /q > nul 2>&1
 if /i "%DiskPart%"=="True" goto "DiskPartDone"
 goto "Start"
 
 :"DiskPartExist"
 set DiskPart=True
 echo.
-echo Please temporary rename to something else or temporary move to another location "%cd%\diskpart.txt" in order for this batch file to proceed. "%cd%\diskpart.txt" is not a system file. Press any key to continue when "%cd%\diskpart.txt" is renamed to something else or moved to another location. This batch file will let you know when you can rename it back to its original name or move it back to its original location.
+echo Please temporary rename to something else or temporary move to another location "diskpart.txt" in order for this batch file to proceed. "diskpart.txt" is not a system file. Press any key to continue when "diskpart.txt" is renamed to something else or moved to another location. This batch file will let you know when you can rename it back to its original name or move it back to its original location.
 pause > nul 2>&1
 if /i "%AutoMount%"=="1" goto "1"
 if /i "%AutoMount%"=="2" goto "2"
 if /i "%AutoMount%"=="3" goto "3"
 
 :"DiskPartError"
-del "%cd%\diskpart.txt" /f /q > nul 2>&1
+del "diskpart.txt" /f /q > nul 2>&1
 echo There has been an error! Press any key to try again.
 pause > nul 2>&1
 if /i "%AutoMount%"=="1" goto "1"
@@ -97,7 +89,7 @@ if /i "%AutoMount%"=="3" goto "3"
 
 :"DiskPartDone"
 echo.
-echo You can now rename or move back the file back to "%cd%\diskpart.txt".
+echo You can now rename or move back the file back to "diskpart.txt".
 goto "Start"
 
 :"Close"
