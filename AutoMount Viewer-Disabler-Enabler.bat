@@ -2,7 +2,7 @@
 setlocal
 title AutoMount Viewer/Disabler/Enabler
 echo Program Name: AutoMount Viewer/Disabler/Enabler
-echo Version: 2.0.6
+echo Version: 2.0.7
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
@@ -39,10 +39,10 @@ goto "AutoMount"
 
 :"AutoMount"
 if exist "diskpart.txt" goto "DiskPartExist"
-(echo automount) > "diskpart.txt"
-(echo automount disable) > "diskpart.txt"
-(echo automount scrub) >> "diskpart.txt"
-(echo automount enable) > "diskpart.txt"
+if /i "%AutoMount%"=="1" (echo automount) > "diskpart.txt"
+if /i "%AutoMount%"=="2" (echo automount disable) > "diskpart.txt"
+if /i "%AutoMount%"=="2" (echo automount scrub) >> "diskpart.txt"
+if /i "%AutoMount%"=="3" (echo automount enable) > "diskpart.txt"
 (echo exit) >> "diskpart.txt"
 "%windir%\System32\diskpart.exe" /s "diskpart.txt"
 if not "%errorlevel%"=="0" goto "DiskPartError"
