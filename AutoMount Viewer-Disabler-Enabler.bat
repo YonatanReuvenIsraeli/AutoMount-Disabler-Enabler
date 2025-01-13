@@ -2,7 +2,7 @@
 setlocal
 title AutoMount Viewer/Disabler/Enabler
 echo Program Name: AutoMount Viewer/Disabler/Enabler
-echo Version: 2.0.5
+echo Version: 2.0.6
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
@@ -35,33 +35,13 @@ goto "Start"
 
 :"DiskPartSet"
 set DiskPart=
-if /i "%AutoMount%"=="1" goto "1"
-if /i "%AutoMount%"=="2" goto "2"
-if /i "%AutoMount%"=="3" goto "3"
+goto "AutoMount"
 
-:"1"
+:"AutoMount"
 if exist "diskpart.txt" goto "DiskPartExist"
 (echo automount) > "diskpart.txt"
-(echo exit) >> "diskpart.txt"
-"%windir%\System32\diskpart.exe" /s "diskpart.txt"
-if not "%errorlevel%"=="0" goto "DiskPartError"
-del "diskpart.txt" /f /q > nul 2>&1
-if /i "%DiskPart%"=="True" goto "DiskPartDone"
-goto "Start"
-
-:"2"
-if exist "diskpart.txt" goto "DiskPartExist"
 (echo automount disable) > "diskpart.txt"
 (echo automount scrub) >> "diskpart.txt"
-(echo exit) >> "diskpart.txt"
-"%windir%\System32\diskpart.exe" /s "diskpart.txt"
-if not "%errorlevel%"=="0" goto "DiskPartError"
-del "diskpart.txt" /f /q > nul 2>&1
-if /i "%DiskPart%"=="True" goto "DiskPartDone"
-goto "Start"
-
-:"3"
-if exist "diskpart.txt" goto "DiskPartExist"
 (echo automount enable) > "diskpart.txt"
 (echo exit) >> "diskpart.txt"
 "%windir%\System32\diskpart.exe" /s "diskpart.txt"
@@ -75,17 +55,13 @@ set DiskPart=True
 echo.
 echo Please temporary rename to something else or temporary move to another location "diskpart.txt" in order for this batch file to proceed. "diskpart.txt" is not a system file. "diskpart.txt" is located in the folder you ran this batch file from. Press any key to continue when "diskpart.txt" is renamed to something else or moved to another location. This batch file will let you know when you can rename it back to its original name or move it back to its original location.
 pause > nul 2>&1
-if /i "%AutoMount%"=="1" goto "1"
-if /i "%AutoMount%"=="2" goto "2"
-if /i "%AutoMount%"=="3" goto "3"
+goto "AutoMount"
 
 :"DiskPartError"
 del "diskpart.txt" /f /q > nul 2>&1
 echo There has been an error! Press any key to try again.
 pause > nul 2>&1
-if /i "%AutoMount%"=="1" goto "1"
-if /i "%AutoMount%"=="2" goto "2"
-if /i "%AutoMount%"=="3" goto "3"
+goto "AutoMount"
 
 :"DiskPartDone"
 echo.
