@@ -2,7 +2,7 @@
 setlocal
 title AutoMount Viewer/Disabler/Enabler
 echo Program Name: AutoMount Viewer/Disabler/Enabler
-echo Version: 2.0.7
+echo Version: 2.0.8
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
@@ -21,7 +21,7 @@ goto "Close"
 echo.
 echo [1] View current auto-mount status.
 echo [2] Disable auto-mounting of new drives.
-echo [3] Enable auto-mounting of new drives. (Windows Default)
+echo [3] Enable auto-mounting of new drives. (Windows default)
 echo [4] Exit.
 echo.
 set AutoMount=
