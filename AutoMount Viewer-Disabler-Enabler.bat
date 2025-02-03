@@ -2,7 +2,7 @@
 setlocal
 title AutoMount Viewer/Disabler/Enabler
 echo Program Name: AutoMount Viewer/Disabler/Enabler
-echo Version: 2.0.9
+echo Version: 2.0.10
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
